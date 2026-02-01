@@ -3,7 +3,7 @@ from qrcode.image.styledpil import StyledPilImage
 from qrcode.image.styles.moduledrawers import RoundedModuleDrawer
 
 # 1. PON AQUÍ TU ENLACE REAL
-# Ve a tu navegador, copia el link de tu página y pégalo aquí entre comillas:
+
 url_sevlo = "https://sevloth.github.io/sevlo/" 
 
 print(f"Generando QR para: {url_sevlo}")
@@ -19,10 +19,9 @@ qr = qrcode.QRCode(
 qr.add_data(url_sevlo)
 qr.make(fit=True)
 
-# 3. Personalización Estilo Sevlo
-# Usamos negro o gris muy oscuro para que contraste bien y los teléfonos lo lean rápido.
+# 3. Personalización
 img = qr.make_image(
-    fill_color="#2D2D2D", # El gris oscuro elegante de tu página
+    fill_color="#2D2D2D", 
     back_color="white",
     module_drawer=RoundedModuleDrawer() # Esto hace que los puntitos sean REDONDOS (más moderno)
 )
