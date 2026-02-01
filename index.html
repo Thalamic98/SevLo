@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sevlo | Colección Exclusiva</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/jpg" href="imagenes/Logo.jpg">
+
+    <style>
+        /* --- 1. CONFIGURACIÓN "PRO" (Variables Avanzadas) --- */
+        :root {
+            --color-bg: #FDFBFB;
+            --color-rosa-palo: #EACDC2; 
+            --color-rosa-profundo: #D4A59A;
+            --color-texto: #2D2D2D;
+            --color-gris-claro: #F5F5F5;
+            --color-blanco-cristal: rgba(255, 255, 255, 0.85); /* Para efecto cristal */
+            
+            --gradiente-premium: linear-gradient(135deg, #EACDC2 0%, #FFF0EA 100%);
+            --sombra-flotante: 0 15px 35px rgba(234, 205, 194, 0.3);
+            --sombra-hover: 0 20px 40px rgba(198, 159, 146, 0.4);
+            
+            --font-titulo: 'Playfair Display', serif;
+            --font-subtitulo: 'Cinzel', serif; /* Fuente elegante para detalles */
+            --font-cuerpo: 'Montserrat', sans-serif; /* Muy limpia para lectura */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-texto);
+            font-family: var(--font-cuerpo);
+            line-height: 1.7;
+            overflow-x: hidden; /* Evita scroll horizontal indeseado */
+        }
+
+        /* --- 2. HERO SECTION (La primera impresión) --- */
+        header {
+            position: relative;
+            height: 90vh; /* Ocupa casi toda la pantalla inicial */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, #fff0ea 0%, #fff 70%);
+        }
+
+        /* Elementos decorativos de fondo (Círculos abstractos) */
+        header::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: var(--color-rosa-palo);
+            filter: blur(80px);
+            opacity: 0.4;
+            border-radius: 50%;
+            z-index: 0;
+            animation: flotar 10s infinite ease-in-out;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+            width: 40vw;
+            height: 40vw;
+            background: #ffe4e1;
+            filter: blur(60px);
+            opacity: 0.6;
+            border-radius: 50%;
+            z-index: 0;
+            animation: flotar 15s infinite ease-in-out reverse;
+        }
+
+        /* Animación suave de los fondos */
+        @keyframes flotar {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(20px, 30px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .header-content {
+            z-index: 1; /* Para que el texto esté encima del fondo */
+            padding: 2rem;
+            animation: entradaSuave 1.5s ease-out;
+        }
+
+        .logo-hero {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.5s;
+        }
+
+        .logo-hero:hover { transform: scale(1.05) rotate(5deg); }
+
+        h1 {
+            font-family: var(--font-subtitulo);
+            font-size: clamp(3rem, 8vw, 5rem); /* Tamaño responsivo inteligente */
+            color: var(--color-texto);
+            letter-spacing: 5px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        p.slogan {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .btn-scroll-down {
+            display: inline-block;
+            margin-top: 2rem;
+            font-size: 2rem;
+            color: var(--color-rosa-profundo);
+            animation: rebote 2s infinite;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        @keyframes rebote {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* --- 3. DISEÑO DE CATÁLOGO (Glassmorphism) --- */
+        main {
+            padding: 4rem 1rem;
+            background: #fff;
+            position: relative;
+        }
+
+        h2.section-title {
+            font-family: var(--font-titulo);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--color-texto);
+        }
+
+        h2.section-title span {
+            display: block;
+            font-family: var(--font-cuerpo);
+            font-size: 1rem;
+            color: var(--color-rosa-profundo);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .carousel-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 2.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 3rem 1rem; /* Padding extra para que la sombra no se corte */
+            -webkit-overflow-scrolling: touch;
+            /* Ocultar barra scroll visualmente pero mantener funcionalidad */
+            scrollbar-width: none; /* Firefox */
+        }
+        .carousel::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+        /* TARJETA PRO */
+        .card {
+            flex: 0 0 300px;
+            background: var(--color-blanco);
+            border-radius: 20px;
+            overflow: hidden;
+            scroll-snap-align: center;
+            position: relative;
+            
+            /* Sombra suave y borde sutil */
+            box-shadow: var(--sombra-flotante);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto resorte */
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: var(--sombra-hover);
+        }
+
+        /* Etiqueta de "Nuevo" o "Best Seller" */
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .foto-contenedor {
+            height: 380px; /* Más alto para verse elegante */
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .foto-contenedor img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        /* Zoom lento al pasar el mouse */
+        .card:hover .foto-contenedor img {
+            transform: scale(1.1);
+        }
+        
+        /* Doble imagen lógica */
+        .foto-2 { position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease; }
+        .card:hover .foto-2 { opacity: 1; }
+
+        .card-info {
+            padding: 1.5rem;
+            text-align: center;
+            background: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card h3 {
+            font-family: var(--font-titulo);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .precio {
+            font-family: var(--font-cuerpo);
+            font-weight: 600;
+            color: var(--color-rosa-profundo);
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .btn-premium {
+            display: inline-block;
+            width: 100%;
+            padding: 12px 0;
+            background: var(--color-texto);
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            border-radius: 5px; /* Botón más cuadrado y elegante */
+            transition: all 0.3s ease;
+        }
+
+        .btn-premium:hover {
+            background: var(--color-rosa-profundo);
+            letter-spacing: 3px; /* Efecto de expansión */
+        }
+
+        /* --- 4. SECCIÓN CÓMO COMPRAR (Minimalista) --- */
+        .steps-section {
+            background: var(--color-gris-claro);
+            padding: 5rem 1rem;
+            text-align: center;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 3rem auto 0;
+        }
+
+        .step-card {
+            padding: 2rem;
+        }
+
+        .step-number {
+            font-family: var(--font-subtitulo);
+            font-size: 4rem;
+            color: rgba(234, 205, 194, 0.5); /* Número gigante semitransparente */
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        /* --- 5. FOOTER & EXTRAS --- */
+        footer {
+            background: #1a1a1a; /* Footer oscuro para contraste "Luxury" */
+            color: #fff;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        footer p { opacity: 0.7; font-size: 0.9rem; }
+        footer strong { color: var(--color-rosa-palo); opacity: 1; }
+
+        /* Botón Flotante de WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* Animación de Entrada para el contenido */
+        @keyframes entradaSuave {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <img src="imagenes/Logo.jpg" alt="Sevlo Logo" class="logo-hero">
+        <h1>Sevlo</h1>
+        <p class="slogan">Artesanía cosmética en cada gota</p>
+        <a href="#catalogo" class="btn-scroll-down">&#8964;</a> </div>
+</header>
+
+<main id="catalogo">
+    <h2 class="section-title">
+        <span>Colección 2026</span>
+        Nuestros Favoritos
+    </h2>
+    
+    <div class="carousel-wrapper">
+        <div class="carousel">
+
+            <div class="card">
+                <div class="badge">Best Seller</div>
+                <div class="foto-contenedor">
+                    <img src="imagenes/serum nicotinamida.jpeg" class="foto-1" alt="Nicotinamida">
+                    <img src="imagenes/nicotinamida2.jpeg" class="foto-2" alt="Nicotinamida Detalle">
+                </div>
+                <div class="card-info">
+                    <h3>Serum Nicotinamida</h3>
+                    <p class="precio">$50.00</p>
+                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20quiero%20el%20Serum%20Nicotinamida" class="btn-premium" target="_blank">Pedir Ahora</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="badge">Nuevo</div>
+                <div class="foto-contenedor">
+                    <img src="imagenes/Serum curcuma7.jpeg" class="foto-1" alt="Cúrcuma">
+                    <img src="imagenes/curcuma 2.jpeg" class="foto-2" alt="Cúrcuma Detalle">
+                </div>
+                <div class="card-info">
+                    <h3>Serum de Cúrcuma</h3>
+                    <p class="precio">$50.00</p>
+                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20quiero%20el%20Serum%20Curcuma" class="btn-premium" target="_blank">Pedir Ahora</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="foto-contenedor">
+                    <img src="imagenes/shampoo romero.jpeg" alt="Shampoo Romero">
+                </div>
+                <div class="card-info">
+                    <h3>Shampoo Romero</h3>
+                    <p class="precio">$80.00</p>
+                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20quiero%20el%20Shampoo%20Romero" class="btn-premium" target="_blank">Pedir Ahora</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="foto-contenedor">
+                    <img src="imagenes/shampoo.jpeg" alt="Shampoo Rapunzel">
+                </div>
+                <div class="card-info">
+                    <h3>Shampoo Rapunzel</h3>
+                    <p class="precio">$80.00</p>
+                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20quiero%20el%20Shampoo%20Rapunzel" class="btn-premium" target="_blank">Pedir Ahora</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="foto-contenedor">
+                    <img src="imagenes/Acondiconador.jpeg" alt="Acondicionador">
+                </div>
+                <div class="card-info">
+                    <h3>Acondicionador</h3>
+                    <p class="precio">$80.00</p>
+                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20quiero%20el%20Acondicionador" class="btn-premium" target="_blank">Pedir Ahora</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="foto-contenedor">
+                    <img src="imagenes/Tonico.jpeg" alt="Tónico">
+                </div>
+                <div class="card-info">
+                    <h3>Tónico de Rizos</h3>
+                    <p class="precio">$60.00</p>
+                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20quiero%20el%20Tonico" class="btn-premium" target="_blank">Pedir Ahora</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="foto-contenedor">
+                    <img src="imagenes/cera en barra.jpeg" alt="Cera">
+                </div>
+                <div class="card-info">
+                    <h3>Cera en Barra</h3>
+                    <p class="precio">$50.00</p>
+                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20quiero%20la%20Cera" class="btn-premium" target="_blank">Pedir Ahora</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="badge">Favorito</div>
+                <div class="foto-contenedor">
+                    <img src="imagenes/agua camelias.jpeg" class="foto-1" alt="Camelias">
+                    <img src="imagenes/camelias.jpeg" class="foto-2" alt="Camelias Detalle">
+                </div>
+                <div class="card-info">
+                    <h3>Agua de Camelias</h3>
+                    <p class="precio">$80.00</p>
+                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20quiero%20el%20Agua%20Camelias" class="btn-premium" target="_blank">Pedir Ahora</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<section class="steps-section">
+    <h2 class="section-title"><span>Proceso de Compra</span>Tu pedido en 3 pasos</h2>
+    
+    <div class="steps-grid">
+        <div class="step-card">
+            <div class="step-number">01</div>
+            <h3>Selecciona</h3>
+            <p>Explora nuestra colección y elige lo que tu piel necesita.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">02</div>
+            <h3>Escribe</h3>
+            <p>Toca el botón y conecta directo con nosotros por WhatsApp.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">03</div>
+            <h3>Recibe</h3>
+            <p>Entregas personales y seguras en puntos céntricos de CDMX.</p>
+        </div>
+    </div>
+</section>
+
+<a href="https://wa.me/+525551725689" class="whatsapp-float" target="_blank">
+    &#128172; 
+</a>
+
+<footer>
+    <p>&copy; 2026 <strong>SEVLO</strong>. Ciudad de México.</p>
+    <p>Hecho con precisión.</p>
+</footer>
+
+</body>
+</html>
