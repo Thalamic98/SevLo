@@ -4,7 +4,7 @@ from qrcode.image.styles.moduledrawers import RoundedModuleDrawer
 
 # 1. PON AQUÍ TU ENLACE REAL
 
-url_sevlo = "https://sevloth.github.io/sevlo/" 
+url_sevlo = "https://thalamic98.github.io/SevLo/" 
 
 print(f"Generando QR para: {url_sevlo}")
 
