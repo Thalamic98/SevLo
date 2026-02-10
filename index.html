@@ -18,7 +18,7 @@
             --color-rosa-profundo: #D4A59A;
             --color-texto: #2D2D2D;
             --color-gris-claro: #F5F5F5;
-            --color-blanco-cristal: rgba(255, 255, 255, 0.85);
+            --color-blanco-cristal: rgba(255, 255, 255, 0.95);
             --color-verde-whatsapp: #25d366;
             
             --gradiente-premium: linear-gradient(135deg, #EACDC2 0%, #FFF0EA 100%);
@@ -30,7 +30,7 @@
             --font-cuerpo: 'Montserrat', sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
             background-color: var(--color-bg);
@@ -38,12 +38,53 @@
             font-family: var(--font-cuerpo);
             line-height: 1.7;
             overflow-x: hidden;
+            padding-top: 60px; /* Espacio para el menú fijo */
+        }
+
+        /* --- NUEVO: MENÚ DE NAVEGACIÓN STICKY --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--color-blanco-cristal);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 0.8rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            overflow-x: auto; /* Permite scroll en móviles */
+            padding: 0 1rem;
+            white-space: nowrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--color-texto);
+            font-family: var(--font-subtitulo);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: var(--color-rosa-palo);
+            color: white;
         }
 
         /* --- HERO SECTION --- */
         header {
             position: relative;
-            height: 90vh;
+            height: 85vh; /* Un poco menos alto para ver contenido */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -56,31 +97,19 @@
         header::before {
             content: '';
             position: absolute;
-            top: -10%;
-            left: -10%;
-            width: 50vw;
-            height: 50vw;
+            top: -10%; left: -10%; width: 50vw; height: 50vw;
             background: var(--color-rosa-palo);
-            filter: blur(80px);
-            opacity: 0.4;
-            border-radius: 50%;
-            z-index: 0;
-            animation: flotar 10s infinite ease-in-out;
+            filter: blur(80px); opacity: 0.4; border-radius: 50%;
+            z-index: 0; animation: flotar 10s infinite ease-in-out;
         }
 
         header::after {
             content: '';
             position: absolute;
-            bottom: -10%;
-            right: -10%;
-            width: 40vw;
-            height: 40vw;
+            bottom: -10%; right: -10%; width: 40vw; height: 40vw;
             background: #ffe4e1;
-            filter: blur(60px);
-            opacity: 0.6;
-            border-radius: 50%;
-            z-index: 0;
-            animation: flotar 15s infinite ease-in-out reverse;
+            filter: blur(60px); opacity: 0.6; border-radius: 50%;
+            z-index: 0; animation: flotar 15s infinite ease-in-out reverse;
         }
 
         @keyframes flotar {
@@ -89,321 +118,144 @@
             100% { transform: translate(0, 0); }
         }
 
-        .header-content {
-            z-index: 1;
-            padding: 2rem;
-            animation: entradaSuave 1.5s ease-out;
-        }
+        .header-content { z-index: 1; padding: 2rem; animation: entradaSuave 1.5s ease-out; }
 
         .logo-hero {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
+            width: 140px; height: 140px; object-fit: cover;
+            border-radius: 50%; border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 1.5rem;
             transition: transform 0.5s;
         }
-
         .logo-hero:hover { transform: scale(1.05) rotate(5deg); }
 
         h1 {
             font-family: var(--font-subtitulo);
             font-size: clamp(2.5rem, 7vw, 4.5rem);
             color: var(--color-texto);
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
+            letter-spacing: 3px; margin-bottom: 1rem;
         }
 
-        p.slogan {
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            color: #666;
-            margin-bottom: 1rem;
-            max-width: 600px;
-        }
-
-        p.target-audience {
-            font-size: 0.95rem;
-            color: rgb(216, 102, 166);
-            font-style: italic;
-            max-width: 650px;
-            margin: 0 auto 2rem;
-        }
+        p.slogan { font-size: 1.1rem; letter-spacing: 1px; color: #666; margin-bottom: 0.5rem; max-width: 600px; }
+        p.target-audience { font-size: 0.95rem; color: rgb(216, 102, 166); font-style: italic; max-width: 650px; margin: 0 auto 2rem; }
 
         .btn-scroll-down {
-            display: inline-block;
-            margin-top: 2rem;
-            font-size: 2rem;
-            color: var(--color-rosa-profundo);
-            animation: rebote 2s infinite;
-            cursor: pointer;
-            text-decoration: none;
+            display: inline-block; margin-top: 1rem; font-size: 2rem;
+            color: var(--color-rosa-profundo); animation: rebote 2s infinite;
+            cursor: pointer; text-decoration: none;
         }
-
         @keyframes rebote {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
             40% {transform: translateY(-10px);}
             60% {transform: translateY(-5px);}
         }
 
-        /* --- CATÁLOGO --- */
-        main {
-            padding: 4rem 1rem;
-            background: #fff;
-            position: relative;
+        /* --- CATÁLOGO GENERAL --- */
+        main { padding: 2rem 0; background: #fff; position: relative; }
+
+        /* Categorías */
+        .category-section {
+            padding: 3rem 1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
         h2.section-title {
             font-family: var(--font-titulo);
-            font-size: 2.5rem;
+            font-size: 2rem;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             color: var(--color-texto);
         }
 
         h2.section-title span {
-            display: block;
-            font-family: var(--font-cuerpo);
-            font-size: 1rem;
-            color: var(--color-rosa-profundo);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
+            display: block; font-family: var(--font-cuerpo); font-size: 0.9rem;
+            color: var(--color-rosa-profundo); letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 0.5rem;
         }
 
-        .carousel-wrapper {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-        }
+        .carousel-wrapper { max-width: 1400px; margin: 0 auto; position: relative; }
 
         .carousel {
-            display: flex;
-            gap: 2.5rem;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding: 3rem 1rem;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            display: flex; gap: 2rem; overflow-x: auto;
+            scroll-snap-type: x mandatory; padding: 2rem 1rem;
+            -webkit-overflow-scrolling: touch; scrollbar-width: none;
         }
         .carousel::-webkit-scrollbar { display: none; }
 
         /* TARJETA MEJORADA */
         .card {
-            flex: 0 0 320px;
-            background: rgb(255, 255, 255);
+            flex: 0 0 300px;
+            background: white;
             border-radius: 20px;
             overflow: hidden;
             scroll-snap-align: center;
             position: relative;
             box-shadow: var(--sombra-flotante);
             border: 1px solid rgba(234, 205, 194, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
+            transition: all 0.4s ease;
+            display: flex; flex-direction: column;
         }
+        .card:hover { transform: translateY(-10px); box-shadow: var(--sombra-hover); }
 
-        .card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: var(--sombra-hover);
-        }
-
-        /* Etiquetas mejoradas */
         .badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
+            position: absolute; top: 15px; left: 15px;
             background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            z-index: 10;
-            backdrop-filter: blur(10px);
+            padding: 6px 14px; border-radius: 20px;
+            font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1.5px; z-index: 10;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border: 1px solid rgba(212, 165, 154, 0.3);
             color: var(--color-rosa-profundo);
         }
 
-        .foto-contenedor {
-            height: 380px;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .foto-contenedor img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-
-        .card:hover .foto-contenedor img {
-            transform: scale(1.1);
-        }
-        
-        .foto-2 { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            opacity: 0; 
-            transition: opacity 0.5s ease; 
-        }
+        .foto-contenedor { height: 320px; width: 100%; position: relative; overflow: hidden; flex-shrink: 0; }
+        .foto-contenedor img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+        .card:hover .foto-contenedor img { transform: scale(1.1); }
+        .foto-2 { position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease; }
         .card:hover .foto-2 { opacity: 1; }
 
         .card-info {
-            padding: 1.5rem;
-            text-align: center;
-            background: white;
-            position: relative;
-            z-index: 2;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+            padding: 1.5rem; text-align: center; background: white;
+            position: relative; z-index: 2; flex-grow: 1;
+            display: flex; flex-direction: column;
         }
 
-        .card h3 {
-            font-family: var(--font-titulo);
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
+        .card h3 { font-family: var(--font-titulo); font-size: 1.2rem; margin-bottom: 0.5rem; color: #333; }
+        .beneficio { font-size: 0.8rem; color: #666; margin-bottom: 0.8rem; font-style: italic; line-height: 1.3; }
+        .precio { font-weight: 600; color: var(--color-rosa-profundo); font-size: 1.2rem; margin-bottom: 1rem; }
 
-        .beneficio {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
-            font-style: italic;
-        }
-
-        .precio {
-            font-family: var(--font-cuerpo);
-            font-weight: 600;
-            color: var(--color-rosa-profundo);
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Botón consistente y visible */
         .btn-premium {
-            display: inline-block;
-            width: 100%;
-            padding: 14px 0;
-            background: var(--color-texto);
-            color: white;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            font-weight: 600;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            display: inline-block; width: 100%; padding: 12px 0;
+            background: var(--color-texto); color: white; text-decoration: none;
+            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;
+            font-weight: 600; border-radius: 8px; transition: all 0.3s ease;
             margin-top: auto;
-            box-shadow: 0 4px 12px rgba(45, 45, 45, 0.2);
         }
-
-        .btn-premium:hover {
-            background: var(--color-rosa-profundo);
-            letter-spacing: 3px;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 165, 154, 0.4);
-        }
+        .btn-premium:hover { background: var(--color-rosa-profundo); transform: translateY(-2px); }
 
         .btn-detalle {
-            display: block;
-            margin: 0.8rem 0;
-            color: var(--color-rosa-profundo);
-            text-decoration: none;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: color 0.3s;
+            display: block; margin: 0.5rem 0; color: var(--color-rosa-profundo);
+            text-decoration: none; font-size: 0.75rem; cursor: pointer;
         }
+        .btn-detalle:hover { text-decoration: underline; color: var(--color-texto); }
 
-        .btn-detalle:hover {
-            color: var(--color-texto);
-            text-decoration: underline;
-        }
-
-        /* MODAL DE DETALLE */
+        /* MODAL */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%; overflow: auto;
+            background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
         }
-
         .modal-content {
-            background-color: #fff;
-            margin: 5% auto;
-            padding: 2.5rem;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: modalSlideIn 0.4s ease-out;
+            background-color: #fff; margin: 10% auto; padding: 2rem;
+            border-radius: 20px; width: 90%; max-width: 500px;
+            animation: modalSlideIn 0.4s ease-out; position: relative;
         }
+        @keyframes modalSlideIn { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .close { float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .modal h3 { font-family: var(--font-titulo); color: var(--color-rosa-profundo); margin-bottom: 1rem; }
+        .modal-detalle h4 { font-size: 0.9rem; text-transform: uppercase; margin-top: 1rem; color: #333; }
+        .modal-detalle p, .modal-detalle ul { font-size: 0.9rem; color: #555; }
 
-        @keyframes modalSlideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        .close:hover { color: var(--color-texto); }
-
-        .modal h3 {
-            font-family: var(--font-titulo);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--color-texto);
-        }
-
-        .modal-detalle {
-            text-align: left;
-            margin: 1rem 0;
-        }
-
-        .modal-detalle h4 {
-            font-size: 1rem;
-            color: var(--color-rosa-profundo);
-            margin: 1rem 0 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .modal-detalle p, .modal-detalle ul {
-            font-size: 0.95rem;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .modal-detalle ul {
-            margin-left: 1.5rem;
-        }
-
-        /* SECCIÓN QUIÉNES SOMOS */
-        .about-section {
+        /* EXTRAS */
+         .about-section {
             background: var(--gradiente-premium);
             padding: 5rem 1rem;
             text-align: center;
@@ -420,43 +272,6 @@
             line-height: 1.8;
             margin-bottom: 1rem;
         }
-
-        /* TESTIMONIOS */
-        .testimonials-section {
-            background: white;
-            padding: 5rem 1rem;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 3rem auto 0;
-        }
-
-        .testimonial-card {
-            background: var(--color-gris-claro);
-            padding: 2rem;
-            border-radius: 15px;
-            border-left: 4px solid var(--color-rosa-profundo);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
-
-        .testimonial-card p {
-            font-style: italic;
-            color: #555;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .testimonial-author {
-            font-weight: 600;
-            color: var(--color-rosa-profundo);
-            font-size: 0.9rem;
-        }
-
-        /* PROCESO DE COMPRA MEJORADO */
         .steps-section {
             background: var(--color-gris-claro);
             padding: 5rem 1rem;
@@ -513,19 +328,40 @@
             font-size: 0.9rem;
             color: var(--color-texto);
         }
-
-        /* FOOTER */
-        footer {
-            background: #1a1a1a;
-            color: #fff;
-            text-align: center;
-            padding: 4rem 1rem;
+        .testimonials-section {
+            background: white;
+            padding: 5rem 1rem;
         }
 
-        footer p { opacity: 0.7; font-size: 0.9rem; }
-        footer strong { color: var(--color-rosa-palo); opacity: 1; }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
 
-        /* BOTÓN FLOTANTE WHATSAPP */
+        .testimonial-card {
+            background: var(--color-gris-claro);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--color-rosa-profundo);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--color-rosa-profundo);
+            font-size: 0.9rem;
+        }
+        
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -550,240 +386,270 @@
             transform: scale(1.15);
             box-shadow: 0 8px 25px rgba(239, 115, 115, 0.956);
         }
-
-        @keyframes entradaSuave {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        footer { background: #1a1a1a; color: #fff; text-align: center; padding: 3rem 1rem; }
+        
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .card { flex: 0 0 280px; }
+            .nav-container { justify-content: flex-start; } /* Scroll menu en móvil */
             h1 { font-size: 2.5rem; }
-            .modal-content { width: 95%; padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-<header>
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="#hero" class="nav-link">Inicio</a>
+        <a href="#tendencias" class="nav-link" style="color: #FF4081;">🔥 Viral</a>
+        <a href="#rostro" class="nav-link">Rostro</a>
+        <a href="#cabello" class="nav-link">Cabello</a>
+        <a href="#cuerpo" class="nav-link">Cuerpo</a>
+        <a href="#testimonios" class="nav-link">Opiniones</a>
+    </div>
+</nav>
+
+<header id="hero">
     <div class="header-content">
         <img src="imagenes/Logo.jpg" alt="Sevlo Logo" class="logo-hero">
         <h1>SEVLO</h1>
         <p class="slogan">Cosmética para piel y cabello con ingredientes naturales</p>
         <p class="target-audience">Para piel sensible, cabellos maltratados y quienes buscan productos sin químicos agresivos</p>
-        <a href="#catalogo" class="btn-scroll-down">&#8964;</a>
+        <a href="#tendencias" class="btn-scroll-down">&#8964;</a>
     </div>
 </header>
 
-<main id="catalogo">
-    <h2 class="section-title">
-        <span>Colección 2026</span>
-        Nuestros Favoritos
-    </h2>
-    
-    <div class="carousel-wrapper">
-        <div class="carousel">
-            
-            <div class="card">
-                <div class="badge">Best Seller</div>
-                <div class="foto-contenedor">
-                    <img src="imagenes/perfume_ia.png" class="foto-1" alt="Perfume de feromonas">
-                    <img src="imagenes/perfume_feromonas.jpeg" class="foto-2" alt="Perfume Feromonas Detalle">
+<main>
+    <section id="tendencias" class="category-section" style="background: #fff0ea;">
+        <h2 class="section-title">
+            <span>Lo más visto en redes</span>
+            Tendencias Virales 🔥
+        </h2>
+        <div class="carousel-wrapper">
+            <div class="carousel">
+                
+<div class="card">
+                    <div class="badge" style="background: #FF4081; color: white;">Tendencia #1</div>
+                    <div class="foto-contenedor">
+                        <img src="imagenes/perfume_ia.png" class="foto-1" alt="Feromonas">
+                        <img src="imagenes/perfume_feromonas.jpeg" class="foto-2" alt="Detalle">
+                    </div>
+                    <div class="card-info">
+                        <h3>Perfume de Feromonas</h3>
+                        <p class="beneficio">Potencia tu atracción natural</p>
+                        <p class="precio">$45.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal11'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Perfume de Feromonas">Pedir Ahora</a>
+                    </div>
                 </div>
-                <div class="card-info">
-                    <h3>Perfume de feromonas</h3>
-                    <p class="beneficio">Aroma irresistible y que potencia tu atracción</p>
-                    <p class="precio">$50.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal11'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20el%20Perfume%20de%20Feromonas?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
+                <div class="card">
+                    <div class="badge">Viral</div>
+                    <div class="foto-contenedor">
+                        <img src="imagenes/jabon_ia.png" class="foto-1" alt="Jabón Arroz">
+                        <img src="imagenes/jabon_arroz.jpeg" class="foto-2" alt="Jabón Arroz Real">
+                    </div>
+                    <div class="card-info">
+                        <h3>Jabón de Leche de Arroz</h3>
+                        <p class="beneficio">Efecto aclarante natural y suavizante</p>
+                        <p class="precio">$15.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal12'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Jabón de leche de Arroz">Pedir Ahora</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card">
-                <div class="foto-contenedor">
-                    <img src="imagenes/nicotinamida_ia.png" class="foto-1" alt="Nicotinamida">
-                    <img src="imagenes/nicotinamid2.jpeg" class="foto-2" alt="Nicotinamida Detalle">
+                <div class="card">
+                    <div class="badge">Nuevo</div>
+                    <div class="foto-contenedor">
+                        <img src="imagenes/mascarilla_aguacate_ia.png" class="foto-1" alt="Parches Aguacate">
+                        <img src="imagenes/mascarilla_aguacate.jpeg" class="foto-2" alt="Detalle">
+                    </div>
+                    <div class="card-info">
+                        <h3>Mascarilla para Ojos de Aguacate</h3>
+                        <p class="beneficio">Adiós ojeras: Hidratación profunda</p>
+                        <p class="precio">$50.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal9'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Mascarilla para ojos de Aguacate">Pedir Ahora</a>
+                    </div>
                 </div>
-                <div class="card-info">
-                    <h3>Serum Nicotinamida</h3>
-                    <p class="beneficio">Ayuda a unificar tono y reducir manchas</p>
-                    <p class="precio">$30.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal1'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20el%20Serum%20de%20Nicotinamida?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
+<div class="card">
+                    <div class="badge">Hot</div>
+                    <div class="foto-contenedor">
+                        <img src="imagenes/mascarilla_carbon.jpeg" class="foto-1" alt="Mascarilla Carbón">
+                        <img src="imagenes/viral-carbon.png" class="foto-2" alt="Modelo Viral">
+                    </div>
+                    <div class="card-info">
+                        <h3>Mascarilla de Carbón Activado</h3>
+                        <p class="beneficio">Peel-off: Elimina puntos negros al instante</p>
+                        <p class="precio">$10.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal10'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Mascarilla de carbon Activado">Pedir Ahora</a>
+                    </div>
                 </div>
-            </div>
+                
 
-            <div class="card">
-                <div class="badge">Nuevo</div>
-                <div class="foto-contenedor">
-                    <img src="imagenes/mascarilla_aguacate_ia.png" class="foto-1" alt="Mascarilla Ojos Aguacate">
-                    <img src="imagenes/mascarilla_aguacate.jpeg" class="foto-2" alt="Mascarilla Detalle">
+                 <div class="card">
+                    <div class="foto-contenedor">
+                        <img src="imagenes/granada_ia.png" class="foto-1" alt="Granada">
+                        <img src="imagenes/serum_granada.jpeg" class="foto-2" alt="Detalle">
+                    </div>
+                    <div class="card-info">
+                        <h3>Serum de Granada</h3>
+                        <p class="beneficio">Antioxidante potente reafirmante</p>
+                        <p class="precio">$20.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal13'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Serum de Granada">Pedir Ahora</a>
+                    </div>
                 </div>
-                <div class="card-info">
-                    <h3>Mascarilla Ojos Aguacate</h3>
-                    <p class="beneficio">Hidratación profunda para reducir ojeras y líneas finas</p>
-                    <p class="precio">$30.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal9'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20la%20Mascarilla%20de%20Aguacate?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
-                </div>
-            </div>
-            <div class="card">
-    <div class="badge" style="background: #FF4081; color: white;">Tendencia Viral</div>
-    
-    <div class="foto-contenedor">
-        <img src="imagenes/mascarilla_carbon.jpeg" class="foto-1" alt="Mascarilla Carbón Activado Empaque">
-        <img src="imagenes/viral-carbon.png" class="foto-2" alt="Mascarilla Carbón Activado Modelo Viral">
-    </div>
-    
-    <div class="card-info">
-        <h3>Mascarilla Carbón Activado</h3>
-        <p class="beneficio">Peel-off: Elimina puntos negros e impurezas al instante</p>
-        <p class="precio">$30.00</p>
-        <a href="#" class="btn-detalle" onclick="openModal('modal10'); return false;">Ver detalles ↓</a>
-        <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20la%20Mascarilla%20de%20Carbón?" class="btn-premium" target="_blank">Pedir por WhatsAp</a>
-    </div>
-</div>
 
-             <div class="card">
-                <div class="foto-contenedor">
-                    <img src="imagenes/jabon_ia.png" class="foto-1" alt="Jabón de Arroz">
-                    <img src="imagenes/jabon_arroz.jpeg" class="foto-2" alt="Jabón de Arroz Detalle">
+                 <div class="card">
+                    <div class="foto-contenedor">
+                        <img src="imagenes/papaya_ia.png" class="foto-1" alt="Papaya">
+                        <img src="imagenes/serum_papaya.jpeg" class="foto-2" alt="Detalle">
+                    </div>
+                    <div class="card-info">
+                        <h3>Serum de Papaya & Vit C</h3>
+                        <p class="beneficio">Exfolia y reduce poros</p>
+                        <p class="precio">$35.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal14'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Serum de Papaya & Vit C">Pedir Ahora</a>
+                    </div>
                 </div>
-                <div class="card-info">
-                    <h3>Jabón de Leche de Arroz</h3>
-                    <p class="beneficio">Aclara manchas y suaviza la piel delicadamente</p>
-                    <p class="precio">$30.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal12'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20el%20Jabon%20de%20Arroz?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="foto-contenedor">
-                    <img src="imagenes/granada_ia.png" class="foto-1" alt="Serum de Granada">
-                    <img src="imagenes/serum_granada.jpeg" class="foto-2" alt="Serum Granada Detalle">
-                </div>
-                <div class="card-info">
-                    <h3>Serum de Granada</h3>
-                    <p class="beneficio">Antioxidante potente que reafirma y revitaliza</p>
-                    <p class="precio">$50.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal13'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20el%20Serum%20de%20Granada?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
-                </div>
             </div>
-
-             <div class="card">
-                <div class="foto-contenedor">
-                    <img src="imagenes/papaya_ia.png" class="foto-1" alt="Serum de Papaya">
-                    <img src="imagenes/serum_papaya.jpeg" class="foto-2" alt="Serum Papaya Detalle">
-                </div>
-                <div class="card-info">
-                    <h3>Serum Papaya & Vit C</h3>
-                    <p class="beneficio">Ilumina el rostro y reduce poros visiblemente</p>
-                    <p class="precio">$50.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal14'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20el%20Serum%20de%20Papaya?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="badge">Nuevo</div>
-                <div class="foto-contenedor">
-                    <img src="imagenes/curcuma_ia.png" class="foto-1" alt="Cúrcuma">
-                    <img src="imagenes/curma 2.jpeg" class="foto-2" alt="Cúrcuma Detalle">
-                </div>
-                <div class="card-info">
-                    <h3>Serum de Cúrcuma</h3>
-                    <p class="beneficio">Apoya a disminuir inflamación y darle brillo a la piel</p>
-                    <p class="precio">$30.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal2'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20el%20Serum%20de%20Curcuma?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="foto-contenedor">
-                    <img src="imagenes/shampoo romero.jpeg" alt="Shampoo Romero">
-                </div>
-                <div class="card-info">
-                    <h3>Shampoo Romero</h3>
-                    <p class="beneficio">Fortalece la raíz y ayuda a reducir caída</p>
-                    <p class="precio">$65.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal3'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20el%20Shampoo%20de%20Romero%20rapunzel?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="foto-contenedor">
-                    <img src="imagenes/shampoo.jpeg" alt="Shampoo Rapunzel">
-                </div>
-                <div class="card-info">
-                    <h3>Shampoo Rapunzel</h3>
-                    <p class="beneficio">Fortalece la raíz y ayuda a reducir caída</p>
-                    <p class="precio">$65.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal4'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20el%20Shampoo%20de%20rizos%20Rapunzel?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="foto-contenedor">
-                    <img src="imagenes/Acondiconador.jpeg" alt="Acondicionador">
-                </div>
-                <div class="card-info">
-                    <h3>Acondicionador</h3>
-                    <p class="beneficio">Nutre e hidrata profundamente sin apelmazar</p>
-                    <p class="precio">$65.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal5'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20el%20Acondicionador?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="foto-contenedor">
-                    <img src="imagenes/Tonico.jpeg" alt="Tónico">
-                </div>
-                <div class="card-info">
-                    <h3>Tónico de Rizos</h3>
-                    <p class="beneficio">Define rizos y combate el frizz naturalmente</p>
-                    <p class="precio">$65.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal6'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20el%20Tonico?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="foto-contenedor">
-                    <img src="imagenes/cera en barra.jpeg" alt="Cera">
-                </div>
-                <div class="card-info">
-                    <h3>Cera en Barra</h3>
-                    <p class="beneficio">Hidrata labios y zonas secas con ingredientes puros</p>
-                    <p class="precio">$30.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal7'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20la%20Cera?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="badge">Favorito</div>
-                <div class="foto-contenedor">
-                    <img src="imagenes/camelias_ia.png" class="foto-1" alt="Camelias">
-                    <img src="imagenes/cameias.jpeg" class="foto-2" alt="Camelias Detalle">
-                </div>
-                <div class="card-info">
-                    <h3>Tonico facial de Camelias</h3>
-                    <p class="beneficio">Refresca, calma y prepara la piel para el cuidado diario</p>
-                    <p class="precio">$65.00</p>
-                    <a href="#" class="btn-detalle" onclick="openModal('modal8'); return false;">Ver detalles ↓</a>
-                    <a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20tienes%20disponible%20el%20Tonico%20facial%20de%20Camelias?" class="btn-premium" target="_blank">Pedir por WhatsApp</a>
-                </div>
-            </div>
-
         </div>
-    </div>
+    </section>
+
+    <section id="rostro" class="category-section">
+        <h2 class="section-title">
+            <span>Skincare Routine</span>
+            Cuidado Facial 🌸
+        </h2>
+        <div class="carousel-wrapper">
+            <div class="carousel">
+                
+                <div class="card">
+                    <div class="foto-contenedor">
+                        <img src="imagenes/nicotinamida_ia.png" class="foto-1" alt="Nicotinamida">
+                        <img src="imagenes/nicotinamida2.jpeg" class="foto-2" alt="Detalle">
+                    </div>
+                    <div class="card-info">
+                        <h3>Serum de Nicotinamida</h3>
+                        <p class="beneficio">Unifica tono y reduce manchas</p>
+                        <p class="precio">$30.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal1'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Serum de Nicotinamida">Pedir Ahora</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="foto-contenedor">
+                        <img src="imagenes/curcuma_ia.png" class="foto-1" alt="Cúrcuma">
+                        <img src="imagenes/curma 2.jpeg" class="foto-2" alt="Detalle">
+                    </div>
+                    <div class="card-info">
+                        <h3>Serum de Cúrcuma</h3>
+                        <p class="beneficio">Anti-inflamatorio y brillo</p>
+                        <p class="precio">$30.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal2'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Serum de Cúrcuma">Pedir Ahora</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="badge">Favorito</div>
+                    <div class="foto-contenedor">
+                        <img src="imagenes/camelias_ia.png" class="foto-1" alt="Camelias">
+                        <img src="imagenes/camelias.jpeg" class="foto-2" alt="Detalle">
+                    </div>
+                    <div class="card-info">
+                        <h3>Tónico de Camelias</h3>
+                        <p class="beneficio">Refresca y calma piel sensible</p>
+                        <p class="precio">$65.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal8'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Tónico de Camelias">Pedir Ahora</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="cabello" class="category-section" style="background: #fdfbfb;">
+        <h2 class="section-title">
+            <span>Hair & Body</span>
+            Cabello y Cuerpo 🌿
+        </h2>
+        <div class="carousel-wrapper">
+            <div class="carousel">
+                
+                <div class="card">
+                    <div class="foto-contenedor">
+                        <img src="imagenes/shampoo romero.jpeg" alt="Romero">
+                    </div>
+                    <div class="card-info">
+                        <h3>Shampoo de Romero Rapunzel</h3>
+                        <p class="beneficio">Fortalece raíz y reduce caída</p>
+                        <p class="precio">$65.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal3'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Shampoo de Romero Rapunzel">Pedir Ahora</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="foto-contenedor">
+                        <img src="imagenes/shampoo.jpeg" alt="Rapunzel">
+                    </div>
+                    <div class="card-info">
+                        <h3>Shampoo para Rizos Rapunzel</h3>
+                        <p class="beneficio">definición y crecimiento</p>
+                        <p class="precio">$65.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal4'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Sampoo para Rizos Rapunzel">Pedir Ahora</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="foto-contenedor">
+                        <img src="imagenes/Acondiconador.jpeg" alt="Acondicionador">
+                    </div>
+                    <div class="card-info">
+                        <h3>Acondicionador para Rizos Rapunzel</h3>
+                        <p class="beneficio">Hidratación profunda</p>
+                        <p class="precio">$65.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal5'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Acondicionador para Rizos Rapunzel">Pedir Ahora</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="foto-contenedor">
+                        <img src="imagenes/Tonico.jpeg" alt="Tónico Rizos">
+                    </div>
+                    <div class="card-info">
+                        <h3>Tónico de Rizos Rapunzel</h3>
+                        <p class="beneficio">Define y desenrreda sin frizz</p>
+                        <p class="precio">$65.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal6'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Tónicode Rizos Rapunzel">Pedir Ahora</a>
+                    </div>
+                </div>
+
+                <div id="cuerpo" class="card">
+                    <div class="foto-contenedor">
+                        <img src="imagenes/cera en barra.jpeg" alt="Cera">
+                    </div>
+                    <div class="card-info">
+                        <h3>Cera Capilar en Barra</h3>
+                        <p class="beneficio">Fijacion natural</p>
+                        <p class="precio">$30.00</p>
+                        <a href="#" class="btn-detalle" onclick="openModal('modal7'); return false;">Ver detalles</a>
+                        <a href="#" class="btn-premium js-whatsapp" data-producto="Cera Capilar en Barra">Pedir Ahora</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
 </main>
 
 <div id="modal1" class="modal">
@@ -1075,7 +941,6 @@
         </div>
     </div>
 </div>
-
 <section class="about-section">
     <h2 class="section-title">
         <span>Nuestra Historia</span>
@@ -1088,21 +953,18 @@
     </div>
 </section>
 
-<section class="testimonials-section">
-    <h2 class="section-title">
-        <span>Voces Reales</span>
-        Lo que dicen nuestros clientes
-    </h2>
+<section id="testimonios" class="testimonials-section">
+    <h2 class="section-title"><span>Voces Reales</span>Lo que dicen nuestros clientes</h2>
     <div class="testimonials-grid">
         <div class="testimonial-card">
-            <p>"Mi cabello es rizado y he utilizado los productos Rapunzel Curly y mi cabello se ve mucho mas saludable y definido 100% recomendado."</p>
-            <div class="testimonial-author">— Uriel M., Cuahutemoc</div>
+            <p>"Mi cabello es rizado y he utilizado los productos Rapunzel Curly y mi cabello se ve mucho mas saludable."</p>
+            <div class="testimonial-author">— Uriel M., Polanco</div>
         </div>
         <div class="testimonial-card">
-            <p>"Mi cabello dejó de caerse tanto con el Serum de gengibre. Siento la raíz más fuerte y el cabello más grueso."</p>
-            <div class="testimonial-author">— Lynda p., Polanco</div>
+            <p>"Mi cabello dejó de caerse tanto con el Serum de gengibre. Siento la raíz más fuerte."</p>
+            <div class="testimonial-author">— Lynda P., Cuahutemoc</div>
         </div>
-        <div class="testimonial-card">
+           <div class="testimonial-card">
             <p>"El shampoo de romero me ha ayudado a mantener el tono oscuro de mi cabello y he notado menos caida."</p>
             <div class="testimonial-author">— Gloria L., Venustiano Carranza</div>
         </div>
@@ -1140,44 +1002,47 @@
         
 </section>
 
-<a href="https://wa.me/+525551725689?text=Hola%20Sevlo,%20quiero%20más%20información" class="whatsapp-float" target="_blank" title="Contactar por WhatsApp">
-    &#128172;
-</a>
+
+<a href="https://wa.me/+525551725689" class="whatsapp-float" target="_blank">&#128172;</a>
 
 <footer>
     <p>&copy; 2026 <strong>SEVLO</strong>. Ciudad de México.</p>
-    <p></p>
 </footer>
 
 <script>
-function openModal(modalId) {
-    document.getElementById(modalId).style.display = "block";
-    document.body.style.overflow = "hidden"; // Previene scroll del body
-}
+function openModal(id) { document.getElementById(id).style.display = "block"; document.body.style.overflow = "hidden"; }
+function closeModal(id) { document.getElementById(id).style.display = "none"; document.body.style.overflow = "auto"; }
+window.onclick = function(e) { if (e.target.classList.contains('modal')) { e.target.style.display = "none"; document.body.style.overflow = "auto"; } }
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    
+    // --- ZONA DE EDICIÓN ---
+    // Aquí cambias el número y el mensaje UNA SOLA VEZ para todos
+    const telefono = "525551725689"; 
+    const mensajeBase = "Hola Sevlo, sigue disponible:"; 
+    // -----------------------
 
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = "none";
-    document.body.style.overflow = "auto"; // Restaura scroll
-}
+    // Seleccionamos todos los botones que tengan la clase 'js-whatsapp'
+    const botones = document.querySelectorAll('.js-whatsapp');
 
-// Cerrar modal al hacer clic fuera
-window.onclick = function(event) {
-    if (event.target.classList.contains('modal')) {
-        event.target.style.display = "none";
-        document.body.style.overflow = "auto";
-    }
-}
-
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+    botones.forEach(boton => {
+      // 1. Obtenemos el nombre específico de cada producto
+      const nombreProducto = boton.getAttribute('data-producto');
+      
+      // 2. Juntamos el mensaje base + el nombre del producto
+      const mensajeFinal = `${mensajeBase} ${nombreProducto}`;
+      
+      // 3. Creamos el enlace oficial de WhatsApp (codificado para que funcionen los espacios)
+      const enlaceGenerado = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeFinal)}`;
+      
+      // 4. Se lo inyectamos al botón
+      boton.setAttribute('href', enlaceGenerado);
+      
+      // Opcional: Para que abra en una pestaña nueva
+      boton.setAttribute('target', '_blank');
     });
-});
+  });
 </script>
 
 </body>
